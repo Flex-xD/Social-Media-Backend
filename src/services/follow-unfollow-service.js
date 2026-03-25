@@ -1,4 +1,4 @@
-import User from "../models/userModel.js";
+import User from "../models/User.js";
 import { StatusCodes } from "http-status-codes";
 import ApiError from "../utils/api-error/index.js";
 

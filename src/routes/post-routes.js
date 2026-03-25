@@ -5,13 +5,13 @@ import {
     getFeedController,
     deletePostController,
     likePostController
-} from "../controllers/post.controller.js";
+} from "../controllers/post-controller.js";
 
 import authMiddleware
-from "../middlewares/auth.middleware.js";
+from "../middlewares/auth-middleware.js";
 
 import upload
-from "../middlewares/upload.middleware.js";
+from "../middlewares/upload-middleware.js";
 
 const router = express.Router();
 

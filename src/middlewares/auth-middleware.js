@@ -2,10 +2,10 @@ import jwt from "jsonwebtoken";
 import { StatusCodes } from "http-status-codes";
 import asyncHandler from "../utils/async-handler/index.js";
 import ApiError from "../utils/api-error/index.js";
-import User from "../models/userModel.js";
+import User from "../models/User.js";
 
 
-export const protectRoute = asyncHandler(
+const protectRoute = asyncHandler(
     async (req, res, next) => {
 
         let token;
@@ -56,3 +56,5 @@ export const protectRoute = asyncHandler(
 
     }
 );
+
+export default protectRoute;

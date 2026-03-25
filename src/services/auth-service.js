@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
+import User from "../models/User.js";
 import { StatusCodes } from "http-status-codes";
 import ApiError from "../utils/api-error/index.js";
 
@@ -104,6 +104,7 @@ export const loginService = async ({ email, username, password }) => {
         password,
         user.password
     );
+    console.log(password , user.password);
 
     if (!isMatch) {
         throw ApiError(

@@ -1,5 +1,5 @@
-import Comment from "../models/commentModel.js";
-import Post from "../models/postModel.js";
+import Comment from "../models/Comment.js";
+import Post from "../models/Post.js";
 import { StatusCodes } from "http-status-codes";
 import ApiError from "../utils/api-error/index.js";
 
@@ -8,7 +8,6 @@ export const addCommentService = async (
     postId,
     text
 ) => {
-
     if (!text) {
         throw ApiError(
             StatusCodes.BAD_REQUEST,

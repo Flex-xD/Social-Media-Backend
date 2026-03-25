@@ -7,7 +7,7 @@ import {
     getFeedService,
     deletePostService,
     likePostService
-} from "../services/post.service.js";
+} from "../services/post-service.js";
 
 export const createPostController =
 asyncHandler(async (req, res) => {
@@ -52,8 +52,37 @@ asyncHandler(async (req, res) => {
     return sendResponse(res, {
         statusCode: StatusCodes.OK,
         success: true,
-        msg: "Feed fetched",
+        msg: "Feed fetched successfully",
         data: posts
+
+    });
+
+});
+
+export const likeUnlikeController =
+asyncHandler(async (req, res) => {
+
+    const userId =
+        req.user.userId;
+
+    const { postId } =
+        req.params;
+
+    const result =
+        await likeAndUnlike(
+            postId,
+            userId
+        );
+
+    return sendResponse(res, {
+
+        statusCode:
+        StatusCodes.OK,
+
+        success: true,
+
+        msg: `Post ${result}`
+
     });
 
 });

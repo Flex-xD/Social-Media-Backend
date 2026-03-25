@@ -1,7 +1,7 @@
-import Post from "../models/postModel.js";
-import User from "../models/userModel.js";
+import Post from "../models/Post.js";
+import User from "../models/User.js";
 import { uploadImageService }
-    from "./upload.service.js";
+    from "./upload-service.js";
 
 import { StatusCodes }
     from "http-status-codes";
@@ -57,6 +57,40 @@ export const createPostService =
         return post;
     };
 
+export const getFeedService = async () => {
+    const posts = await Post.find()
+        .populate({
+            path: "author",
+            select: "username"
+        });
+
+    return posts;
+}
+
+export const likePostService = async (postId, userId) => {
+    const post =
+        await Post.findById(postId);
+    if (!post) {
+        throw ApiError(
+            StatusCodes.NOT_FOUND,
+            "Post not found"
+        );
+    }
+
+    if (post.likes.includes(userId)) {
+        await Post.findByIdAndUpdate(postId , {
+            $pull:{
+                likes:userId
+            }
+        })
+        return "unliked";
+    }
+    await Post.findByIdAndUpdate(postId ,  {
+        $push:{
+            likes:userId
+        }
+    })
+}
 
 export const deletePostService =
     async (

@@ -6,7 +6,7 @@ import {
     loginService,
     logoutService,
     createToken
-} from "../services/auth.service.js";
+} from "../services/auth-service.js";
 
 const maxAge = 7 * 24 * 60 * 60 * 1000;
 

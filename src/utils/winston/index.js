@@ -1,12 +1,10 @@
 import { createLogger, format, transports } from "winston";
-// import mongoose from "mongoose";
 
 const { combine, timestamp, printf, colorize, errors } = format;
 
 const logFormat = printf(({ level, message, timestamp, stack }) => {
     return `${timestamp} [${level}] : ${stack || message}`;
 });
-
 
 export const logger = createLogger({
     level: "info",
@@ -23,9 +21,3 @@ export const logger = createLogger({
         new transports.File({ filename: "logs/combined.log" }),
     ],
 });
-
-
-
-// export const isValidObjectId = (id) => {
-//     return mongoose.Types.ObjectId.isValid(id);
-// };

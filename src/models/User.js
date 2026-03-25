@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
@@ -52,21 +52,16 @@ const userSchema = new mongoose.Schema({
 });
 
 // ? see if pre hashing is working or else remove it
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
 
     if (!this.isModified("password"))
-        return next();
-
-    const salt =
-        await bcrypt.genSalt(10);
+        return;
 
     this.password =
         await bcrypt.hash(
             this.password,
-            salt
+            10
         );
-
-    next();
 
 });
 

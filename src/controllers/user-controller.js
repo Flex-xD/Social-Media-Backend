@@ -1,12 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import asyncHandler from "../utils/async-handler/index.js";
 import sendResponse from "../utils/send-response/index.js";
-
-import {
-    followUserService,
-    getUserProfileService
-} from "../services/user.service.js";
-
+import { followUserService } from "../services/follow-unfollow-service.js";
+import { getUserProfileService } from "../services/profile-service.js";
 
 export const followUserController =
 asyncHandler(async (req, res) => {

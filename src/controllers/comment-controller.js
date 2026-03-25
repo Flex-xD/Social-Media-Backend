@@ -4,7 +4,7 @@ import sendResponse from "../utils/send-response/index.js";
 import {
     addCommentService,
     deleteCommentService
-} from "../services/comment.service.js";
+} from "../services/comment-service.js";
 
 
 export const addCommentController =

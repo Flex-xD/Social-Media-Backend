@@ -10,8 +10,11 @@ const ApiError = (
     error.errors = errors;
 
     // ? See if this console is needed
-    console.log(`error : ${{statusCode , errors}}`);
-    return error;
+console.log("Error:", {
+    statusCode,
+    message,
+    errors
+});    return error;
 };
 
 export default ApiError;

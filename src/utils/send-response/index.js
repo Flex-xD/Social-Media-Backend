@@ -1,7 +1,17 @@
-import { logger } from "../winston"
+import { logger } from "../winston/index.js";
 
-const sendResponse = async (res, { statusCode, success, message, data }) => {
-    logger.info(`response sent : ${statusCode, success, message , data}`);
+const sendResponse = (res, { statusCode, success, message, data }) => {
+    logger.info({
+        statusCode,
+        success,
+        message,
+        data
+    }); return res.status(statusCode).json({
+        statusCode,
+        success,
+        message,
+        data
+    })
 }
 
 export default sendResponse;
