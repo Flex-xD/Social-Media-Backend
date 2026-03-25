@@ -16,8 +16,8 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true , 
-        minLength:6
+        required: true,
+        minLength: 6
     },
     profilePicture: {
         url: { type: String },
@@ -29,8 +29,8 @@ const userSchema = new mongoose.Schema({
         format: { type: String },
     },
     bio: {
-        type: String ,
-        default:""
+        type: String,
+        default: ""
     },
     following: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -47,16 +47,28 @@ const userSchema = new mongoose.Schema({
         ref: 'Post',
         default: []
     }]
-} , {
-    timestamps:true
+}, {
+    timestamps: true
 });
 
 // ? see if pre hashing is working or else remove it
-userSchema.pre("save" , async (next) => {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password , salt); 
-    next();
-})
+userSchema.pre("save", async function (next) {
 
-const User = mongoose.model('User' , userSchema);
+    if (!this.isModified("password"))
+        return next();
+
+    const salt =
+        await bcrypt.genSalt(10);
+
+    this.password =
+        await bcrypt.hash(
+            this.password,
+            salt
+        );
+
+    next();
+
+});
+
+const User = mongoose.model('User', userSchema);
 export default User;
